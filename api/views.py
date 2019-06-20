@@ -29,7 +29,7 @@ def main(request):
             jsonfile['id'] = oobj.id
             mobj.other_fk_id = oobj.id
             mycol.delete_one({"id":oobj.id})
-            mycol.insert_one(jsonfile )
+            mycol.insert_one(jsonfile)
 
             # mobj.other_fk_id = x.inserted_id
 
