@@ -2,6 +2,7 @@ from django.shortcuts import render
 from api.forms import MainForm,OtherForm
 from api.models import Main,OtherField
 from pymongo import MongoClient
+from Ostadkar_final.settings import HOST_NAME,DATABASE_NAME
 import json
 # Create your views here.
 def main(request):
@@ -21,8 +22,8 @@ def main(request):
         mobj.other_fk_id = oobj.id
         print(mobj.other_fk_id)
         if mform.is_valid() and oform.is_valid():
-            myclient = MongoClient("mongodb://localhost:27017/")
-            mydb = myclient["Db"]
+            myclient = MongoClient(HOST_NAME)
+            mydb = myclient[DATABASE_NAME]
             mycol = mydb["api_otherfield"]
             jsonfile = json.loads(oobj.other)
             oobj.save()

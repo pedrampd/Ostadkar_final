@@ -26,8 +26,8 @@ SECRET_KEY = 'wfr-wfb23cf$)s$0824($jj+nrd@fbwyb^j9w(sn(05wm9a@(3'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
+DATABASE_NAME = 'Db'
+HOST_NAME = 'mongodb://localhost:27017/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Ostadkar_final.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'Db',
+        'NAME': DATABASE_NAME,
     }
 }
 
