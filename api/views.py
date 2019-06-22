@@ -3,6 +3,7 @@ from api.forms import MainForm,OtherForm
 from api.models import Main,OtherField
 from pymongo import MongoClient
 from Ostadkar_final.settings import HOST_NAME,DATABASE_NAME
+from .serializers import MainSerializer as ms
 import json
 
 
@@ -29,19 +30,24 @@ def main(request):
             # Connection
             myclient = MongoClient(HOST_NAME)
             mydb = myclient[DATABASE_NAME]
-            mycol = mydb["api_otherfield"]
+            maincol = mydb["api_test"]
+            mainjson = ms(mobj)
+
 
             if oobj.other:
                 try :
                     jsonfile = json.loads(oobj.other)
-                    jsonfile['id'] = oobj.id
-                    mobj.other_fk_id = oobj.id
-                    mycol.delete_one({"id":oobj.id})
-                    mycol.insert_one(jsonfile)
-                except:
-                    print("Could not load json")
+                    # maincol.insert_one(mainjson)
 
-            mobj.save()
+                    mainjson['other'] = jsonfile
+                    maincol.insert(mainjson)
+                except:
+                    mainjson["other"] = oobj.other
+                    maincol.insert(mainjson)
+                    print("Could not load json")
+            else:
+                maincol.insert(mainjson)
+
     return render(request,'api/main.html', context={'form1':mform,'form2':oform})
 
 
