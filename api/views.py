@@ -20,9 +20,6 @@ def main(request):
         mobj.priority = mform['priority'].value()
         mobj.description = mform['description'].value()
         oobj.other = oform['other'].value()
-        if oobj.other:
-            oobj.save()
-            mobj.other_fk_id = oobj.id
 
 
         print(mobj.other_fk_id)
