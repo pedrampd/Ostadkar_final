@@ -10,4 +10,5 @@ class Main(models.Model):
     datetime = models.DateTimeField()
     priority = models.IntegerField()
     description = models.TextField()
+    # not required for nosql vesion but left open in the model for future relational sql uses
     other_fk = models.ForeignKey(OtherField,on_delete=models.CASCADE)
